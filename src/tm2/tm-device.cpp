@@ -1277,6 +1277,9 @@ namespace librealsense
         // Assing the extrinsic nodes to the default group
         auto tm2_profiles = _sensor->get_stream_profiles();
         for (auto && pf : tm2_profiles)
+            if (pf->get_stream_type() == RS2_STREAM_POSE)
+                register_stream_to_extrinsic_group(*pf, 0);
+        for (auto && pf : tm2_profiles)
             register_stream_to_extrinsic_group(*pf, 0);
 
         //For manual testing: enable_loopback("C:\\dev\\recording\\tm2.bag");
